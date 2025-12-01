@@ -1,0 +1,20 @@
+services:
+  proxmenux:
+    build: .
+    container_name: proxmenux
+    tty: true
+    stdin_open: true
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - /etc/pve:/etc/pve:ro
+      - /var/lib/lxc:/var/lib/lxc
+      - /var/lib/vz:/var/lib/vz
+      - /dev:/dev
+      - /lib/modules:/lib/modules:ro
+      # opt
+      # - /mnt/storage:/mnt/storage
+    working_dir: /opt/proxmenux
+    entrypoint: ["/bin/bash"]
+    ports:
+      - "8008:8008"
